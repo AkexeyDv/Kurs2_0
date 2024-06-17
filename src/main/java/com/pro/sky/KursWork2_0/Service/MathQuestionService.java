@@ -1,18 +1,21 @@
 package com.pro.sky.KursWork2_0.Service;
 
+import com.pro.sky.KursWork2_0.Interface.QuestionRepository;
 import com.pro.sky.KursWork2_0.Interface.QuestionService;
 import com.pro.sky.KursWork2_0.Question;
 import com.pro.sky.KursWork2_0.Repository.MathQuestionRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Random;
 
 @Service
+@Qualifier("math")
 public class MathQuestionService implements QuestionService {
-    Random rndIdx=new Random();
-    MathQuestionRepository mathQuestions =new MathQuestionRepository();
+    Random rndIdxM =new Random();
+    QuestionRepository mathQuestions =new MathQuestionRepository();
     @Override
     public Question add(String question, String answer) {
         return mathQuestions.add(new Question(question,answer));
@@ -35,7 +38,7 @@ public class MathQuestionService implements QuestionService {
 
     @Override
     public Question getRandomQuestion() {
-        return mathQuestions.getAll().stream().toList().get(rndIdx.nextInt(mathQuestions.getAll().size()));
+        return mathQuestions.getAll().stream().toList().get(rndIdxM.nextInt(mathQuestions.getAll().size()));
     }
     @PostConstruct
     public void init() {

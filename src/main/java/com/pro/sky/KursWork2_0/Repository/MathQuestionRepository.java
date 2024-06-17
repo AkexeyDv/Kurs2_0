@@ -23,6 +23,9 @@ public class MathQuestionRepository implements QuestionRepository {
 
     @Override
     public Question add(Question question) {
+        if(question==null){
+            throw new ExceptionApp("Передан пустой объект вопроса");
+        }
         Question newQuestion = question;
         questions.add(question);
         return question;
@@ -31,7 +34,7 @@ public class MathQuestionRepository implements QuestionRepository {
     @Override
     public Question remove(Question question) {
         Question delQuestion = question;
-        if(!questions.contains(question)){
+        if(!questions.contains(question)||question==null){
             throw new ExceptionApp("Такого вопроса в репозитории нет");
 
         }

@@ -1,7 +1,9 @@
 package com.pro.sky.KursWork2_0.Controller;
 
 import com.pro.sky.KursWork2_0.Interface.QuestionRepository;
+import com.pro.sky.KursWork2_0.Interface.QuestionService;
 import com.pro.sky.KursWork2_0.Question;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,9 +14,9 @@ import java.util.Collection;
 @RestController
 @RequestMapping(path = "/exam/math")
 public class MathController {
-    private final QuestionRepository mathQuestionRepository;
+    private final QuestionService mathQuestionRepository;
 
-    public MathController(QuestionRepository mathQuestionRepository) {
+    public MathController(@Qualifier("math") QuestionService mathQuestionRepository) {
         this.mathQuestionRepository = mathQuestionRepository;
     }
     @GetMapping

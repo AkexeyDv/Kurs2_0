@@ -30,12 +30,13 @@ public class ExaminerServiseImpl implements ExaminerService {
         if (amount> javaExamQuestion.getAll().size()+mathExamQuestion.getAll().size()){
             throw new ExceptionApp("Превышено количество запрашиваемых вопросов");
         }
+        Random idx=new Random();
         while (questionSet.size()<amount){
-
-
+            if (idx.nextInt(2)==0){
                 questionSet.add(javaExamQuestion.getRandomQuestion());
+            }else{
                 questionSet.add(mathExamQuestion.getRandomQuestion());
-
+            }
         }
         return questionSet;
     }

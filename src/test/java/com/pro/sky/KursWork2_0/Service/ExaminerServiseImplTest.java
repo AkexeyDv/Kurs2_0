@@ -1,40 +1,57 @@
 package com.pro.sky.KursWork2_0.Service;
 
 import com.pro.sky.KursWork2_0.Interface.ExaminerService;
+import com.pro.sky.KursWork2_0.Interface.QuestionRepository;
 import com.pro.sky.KursWork2_0.Interface.QuestionService;
-import com.pro.sky.KursWork2_0.Question;
+import com.pro.sky.KursWork2_0.KursWork20Application;
+import com.pro.sky.KursWork2_0.Repository.JavaQuestionRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.SpringApplication;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiseImplTest {
 
+    @Mock
+    private QuestionService javaQuestion ;
+    @Mock
+    private QuestionService mathQuestion;
+    @Mock
+    private ExaminerService examinerService;
 
-@Mock
-    ExaminerService examinerService;
+
+   // ExaminerService examinerService = new ExaminerServiceImpl(javaQuestion, mathQuestion);
+
+    @BeforeEach
+    void setUp(){
+
+        examinerService = new ExaminerServiceImpl(javaQuestion, mathQuestion);
+        System.out.println(javaQuestion.getAll());
+
+    }
+
+
 
 
     @Test
     void getQuestions() {
-        Mockito.when(examinerService.getQuestions(2)).
-                thenReturn(Set.of(
-                        new Question("Вопрос1j","Ответ1"),
-                        new Question("Вопрос1m","Ответ1")));
+        Mockito.when(javaQuestion.getRandomQuestion())
+                .thenReturn(Constants.JAVA_QUESTIONS.get(0))
+                .thenReturn(Constants.JAVA_QUESTIONS.get(1));
 
-        Assertions.assertArrayEquals(Set.of(
-                new Question("Вопрос1j","Ответ1"),
-                new Question("Вопрос1m","Ответ1")).toArray(),examinerService.getQuestions(2).toArray());
+
+        Mockito.when(mathQuestion.getRandomQuestion())
+                .thenReturn(Constants.MATH_QUESTIONS.get(0))
+                .thenReturn(Constants.MATH_QUESTIONS.get(1));
+
+
+        Assertions.assertEquals(2, examinerService.getQuestions(2).size());
 
     }
 }

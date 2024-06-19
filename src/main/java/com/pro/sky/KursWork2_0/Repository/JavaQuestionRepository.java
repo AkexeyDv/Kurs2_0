@@ -14,6 +14,7 @@ public class JavaQuestionRepository implements QuestionRepository {
     private Set<Question> questions;
 
     public JavaQuestionRepository() {
+        System.out.println("Сработал репозиторий");
         this.questions = new HashSet<>();
     }
 

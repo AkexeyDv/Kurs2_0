@@ -1,5 +1,6 @@
 package com.pro.sky.KursWork2_0.Repository;
 
+import com.pro.sky.KursWork2_0.Interface.QuestionRepository;
 import com.pro.sky.KursWork2_0.Interface.QuestionService;
 import com.pro.sky.KursWork2_0.Question;
 import com.pro.sky.KursWork2_0.Service.JavaQuestionService;
@@ -10,7 +11,8 @@ import org.junit.jupiter.api.Test;
 
 
 class JavaQuestionRepositoryTest {
-    QuestionService out=new JavaQuestionService();
+    QuestionRepository javaRep=new JavaQuestionRepository();
+    QuestionService out=new JavaQuestionService(javaRep);
 
     @BeforeEach
     void setUp() {

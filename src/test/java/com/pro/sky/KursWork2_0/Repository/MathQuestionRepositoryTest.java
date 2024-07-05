@@ -1,6 +1,7 @@
 package com.pro.sky.KursWork2_0.Repository;
 
 import com.pro.sky.KursWork2_0.Exception.ExceptionApp;
+import com.pro.sky.KursWork2_0.Interface.QuestionRepository;
 import com.pro.sky.KursWork2_0.Interface.QuestionService;
 import com.pro.sky.KursWork2_0.Question;
 import com.pro.sky.KursWork2_0.Service.JavaQuestionService;
@@ -12,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MathQuestionRepositoryTest {
-
-    QuestionService out=new MathQuestionService();
+    QuestionRepository mathRep=new MathQuestionRepository();
+    QuestionService out=new MathQuestionService(mathRep);
 
     @BeforeEach
     void setUp() {

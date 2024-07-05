@@ -14,8 +14,13 @@ import java.util.Random;
 @Service
 @Qualifier("math")
 public class MathQuestionService implements QuestionService {
-    Random rndIdxM =new Random();
-    QuestionRepository mathQuestions =new MathQuestionRepository();
+    public MathQuestionService(@Qualifier("mathRep") QuestionRepository mathQuestions) {
+
+        this.mathQuestions = mathQuestions;
+    }
+
+    private final Random rndIdxM =new Random();
+    private final QuestionRepository mathQuestions;
     @Override
     public Question add(String question, String answer) {
         return mathQuestions.add(new Question(question,answer));
@@ -40,12 +45,5 @@ public class MathQuestionService implements QuestionService {
     public Question getRandomQuestion() {
         return mathQuestions.getAll().stream().toList().get(rndIdxM.nextInt(mathQuestions.getAll().size()));
     }
-    @PostConstruct
-    public void init() {
-        mathQuestions.add(new Question("1Math","Otvet1"));
-        mathQuestions.add(new Question("2Math","Otvet2"));
-        mathQuestions.add(new Question("3Math","Otvet3"));
-        mathQuestions.add(new Question("4Math","Otvet4"));
-        mathQuestions.add(new Question("5Math","Otvet5"));
-    }
+
 }

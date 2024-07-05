@@ -3,18 +3,20 @@ package com.pro.sky.KursWork2_0.Repository;
 import com.pro.sky.KursWork2_0.Exception.ExceptionApp;
 import com.pro.sky.KursWork2_0.Interface.QuestionRepository;
 import com.pro.sky.KursWork2_0.Question;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 @Repository
+@Qualifier("javaRep")
 public class JavaQuestionRepository implements QuestionRepository {
 
-    private Set<Question> questions;
+    private final Set<Question> questions;
 
     public JavaQuestionRepository() {
-        System.out.println("Сработал репозиторий");
         this.questions = new HashSet<>();
     }
 
@@ -48,6 +50,17 @@ public class JavaQuestionRepository implements QuestionRepository {
     @Override
     public Collection<Question> getAll() {
         return questions;
+    }
+
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Сработал инит");
+        questions.add(new Question("1Java","Otvet1"));
+        questions.add(new Question("2Java","Otvet2"));
+        questions.add(new Question("3Java","Otvet3"));
+        questions.add(new Question("4Java","Otvet4"));
+        questions.add(new Question("5Java","Otvet5"));
     }
 
     @Override

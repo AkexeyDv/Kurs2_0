@@ -1,8 +1,11 @@
 package com.pro.sky.KursWork2_0.Controller;
 
 import com.pro.sky.KursWork2_0.Interface.QuestionRepository;
+import com.pro.sky.KursWork2_0.Interface.QuestionService;
 import com.pro.sky.KursWork2_0.Question;
 import com.pro.sky.KursWork2_0.Service.JavaQuestionService;
+import com.pro.sky.KursWork2_0.Service.MathQuestionService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,10 +16,11 @@ import java.util.Collection;
 @RestController
 @RequestMapping(path = "/exam/java")
 public class JavaController {
-    private final JavaQuestionService javaQuestionRepository;
+    private final QuestionService javaQuestionRepository;
 
-    public JavaController(JavaQuestionService javaQuestionRepository) {
+    public JavaController(@Qualifier("java") QuestionService javaQuestionRepository) {
         this.javaQuestionRepository = javaQuestionRepository;
+
     }
     @GetMapping
     public Collection<Question> getAll(){
